@@ -1,8 +1,7 @@
-# For API key and environment variables
-python-dotenv==1.1.0
-
-# Streamlit for web UI
 streamlit
-
-# PyTorch (install according to system config)
 torch
+transformers
+datasets
+gdown
+scikit-learn
+pandas
