@@ -38,7 +38,7 @@
 - **Python**
 - **Streamlit** (UI)
 - **HuggingFace Transformers** (BERT-based classification)
-- **Google Gemini Pro** (Information extraction + plan enhancement)
+- **Gemini 2.5 flash** (Information extraction + plan enhancement)
 - **Dotenv** (Environment management)
 
 ---
