@@ -37,7 +37,6 @@ def classify_text(text):
     #print(f"Predictions: {probs}")
     #print(f"Logits: {logits}")
 
-    # Get class indices excluding 'Unidentified' (assumed at index 3)
     filtered_probs = probs[0][:3]  # [Exam, Project, Mastery]
     predicted_idx = torch.argmax(filtered_probs).item()
     confidence = filtered_probs[predicted_idx].item()
@@ -65,15 +64,68 @@ Return the result in this format with apropriate string and integer values:
     "Goal": "Exam"/"Project"/"Mastery"
     "Subject": ...
     "Study Time in Days": ...
-    "Study Time in Hours": ...
+    "Study Time in Hours": ... (Per day)
     "Current Grade/Year": ... "Grade"/"Year"
-    "Learning Style": ... "Visual"/"Auditory"/"Hands-on"
-    "Difficulty Level": ...
+    "Learning Style": [...] (Example: ["Visual"/"Auditory"/"Hands-on"] NOT A DICTIONARY!!!) 
+    "Difficulty Level": "Hard"/"Medium"/"Easy"
 }}
 """
     response = client.models.generate_content(model="gemini-2.5-flash",contents=prompt)
     return response.text
 
+def generate_study_plan(goal, subject, study_hours, study_days, grade, learning_style, difficulty):
+    plan = ""
+
+    # Intro
+    plan += f"🎓 **Personalized Study Plan for {subject} ({goal})**.  \n  \n"
+    plan += f"Student Level: {grade}.  \n"
+    plan += f"Study Duration: {study_days} days for {study_hours} hrs/day.  \n"
+    plan += f"Preferred Learning Style(s): {', '.join(learning_style)}.  \n"
+    plan += f"Difficulty Level: {difficulty}.  \n  \n"
+
+    # Scenario-specific strategy
+    if goal == "Exam":
+        plan += "📌 **Strategy:**\n"
+        plan += "- Prioritize topics you're weak in.\n"
+        plan += "- Use spaced repetition and timed mock tests.\n"
+        plan += "- Increase review frequency as exam approaches.\n\n"
+    elif goal == "Project":
+        plan += "📌 **Strategy:**\n"
+        plan += "- Break down the project into smaller subtasks: research, design, implementation, testing.\n"
+        plan += "- Allocate time per milestone and review regularly.\n\n"
+    elif goal == "Mastery":
+        plan += "📌 **Strategy:**\n"
+        plan += "- Balance theory and practice.\n"
+        plan += "- Mix media: books, videos, hands-on experiments.\n"
+        plan += "- Weekly reflections to track deep understanding.\n\n"
+
+    # Daily Plan
+    plan += "📅 **Daily Plan Overview:**\n"
+    for day in range(1, study_days + 1):
+        plan += f"- **Day {day}:**\n"
+        if goal == "Exam":
+            plan += f"  - {subject}: Study weak topics for {study_hours // 2} hrs,  \nsolve practice problems for {study_hours // 2} hrs.\n"
+        elif goal == "Project":
+            plan += f"  - {subject}: Progress in assigned task.  \nLog findings and prepare for next phase.\n"
+        elif goal == "Mastery":
+            plan += f"  - {subject}: Split time into {', '.join(learning_style)} based sessions (each ~{study_hours // len(learning_style)} hrs).\n"
+    
+    
+    plan += "\n**Tips:**\n"
+    # Gemini Insight
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=f"""Provide daily study tips in short for a plan: {plan} in {subject} for a student with {grade} grade with {difficulty.lower()} difficulty level. 
+        NOTE: This is being used in a Streamlit Web App, so keep the response short and concies without anything extra at the start or end, it should be in markdown points with - at the start. 
+        But with some motivating emojis at the start of each day point and proper linebreak after each day point \n\n"""
+    )
+
+    plan += f"  \n{response.text.strip()}\n"
+
+    # Closing
+    plan += "\n✅  Good Luck!  \n"
+
+    return plan
 
 
 # # Example Classification
@@ -86,7 +138,7 @@ st.title("Studbud: Study Planner")
 st.write("Enter your study-related query below:")
 user_input = st.text_area("Input", height=200, label_visibility="collapsed")
 
-button_1 = st.button("Classify Text")
+button_1 = st.button("Generate Study Form")
 button_2 = st.button("Reload")
 
 if button_1 and user_input.strip():
@@ -98,37 +150,12 @@ if button_1 and user_input.strip():
     try:
         # Attempt to parse the response as a dictionary
         extracted_info = eval(response.replace("```","").replace("json","").strip())  # Convert response to dictionary
+        #print(f"Extracted info:\n {extracted_info}")  # Debugging line to check the extracted info
         st.session_state.extracted_info = extracted_info
         st.session_state.label = label
         st.session_state.show_form = True  # Trigger form rendering
+        st.write("Scenario is wrong? Just change the scenario in the form.")
         st.success(f"Scenario: {label}.")
-        st.write("Scenario is wrong? Reload to try again. Try to be more specific in your text input.")
-
-
-        # with st.form("study_plan_form"):
-        #     goal = st.selectbox("🎯 Goal", options=["Exam", "Project", "Mastery"], index=["Exam", "Project", "Mastery"].index(label))
-        #     subject = st.text_input("📘 Subject", value=extracted_info["Subject"])
-        #     study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=extracted_info["Study Time in Days"], min_value=0)
-        #     study_days = st.number_input("📅 Study Duration (days)", value=extracted_info["Study Time in Hours"], min_value=1)
-        #     grade = st.text_input("🎓 Current Grade", value=extracted_info["Current Grade/Year"])
-        #     learning_style = st.selectbox("🧠 Learning Style", options=["Visual", "Auditory", "Hands-on"], index=["Visual", "Auditory", "Hands-on"].index(extracted_info["Learning Style"]))
-        #     difficulty = st.text_input("⚠️ Difficulty Areas", value=extracted_info["Difficulty Level"])
-        #     submit = st.form_submit_button("✅ Confirm & Generate Study Plan")
-        #     if submit:
-        #         st.write("Generating study plan...")
-        #         # Here you would typically call a function to generate the study plan based on the inputs
-        #         # For now, we will just display the inputs as a placeholder
-        #         st.write("Study Plan:")
-        #         st.write(f"Goal: {goal}")
-        #         st.write(f"Subject: {subject}")
-        #         st.write(f"Study Time per Day: {study_hours} hrs")
-        #         st.write(f"Study Duration: {study_days} days")
-        #         st.write(f"Current Grade: {grade}")
-        #         st.write(f"Learning Style: {learning_style}")
-        #         st.write(f"Difficulty Areas: {difficulty}")
-
-        #         print(f"Goal: {goal}, Subject: {subject}, Study Time per Day: {study_hours} hrs, Study Duration: {study_days} days, Current Grade: {grade}, Learning Style: {learning_style}, Difficulty Areas: {difficulty}")
-        #         st.success("Study plan generated successfully!")
 
     except Exception as e:
         st.error(f"Error parsing response: {e}")
@@ -142,33 +169,68 @@ if button_2:
     st.success("Model reloaded successfully!")
 
 
-    
+# Preserve form state in reruns
 if st.session_state.get("show_form"):
+    
     extracted_info = st.session_state.extracted_info
     label = st.session_state.label
 
+    # Handle missing fields in the extracted info
+    for key, value in extracted_info.items():
+        if value == "Not mentioned":
+            if key == "Subject" or key == "Current Grade/Year":
+                extracted_info[key] = ""
+            elif key == "Learning Style":
+                extracted_info[key] = []
+            elif key == "Difficulty Level":
+                extracted_info[key] = "Medium"
+            elif key == "Study Time in Days" or key == "Study Time in Hours":
+                extracted_info[key] = 0
+
     # Override the goal label if it does not match the extracted info
     if extracted_info["Goal"] != label:
-        new_label = extracted_info["Goal"]
-        st.warning(f"Detected goal '{new_label}' does not match classified label '{label}'. Using detected goal instead.")
-
+        st.warning(f"Detected goal '{extracted_info["Goal"]}' does not match classified label '{label}'. Using detected goal instead.")
+        label = extracted_info["Goal"]   
+    
     with st.form("study_plan_form"):
-        goal = st.selectbox("🎯 Goal (Edit If Necessary)", ["Exam", "Project", "Mastery"], index=["Exam", "Project", "Mastery"].index(new_label))
+        goal = st.selectbox("🎯 Goal (Edit If Necessary)", ["Exam", "Project", "Mastery"], index=["Exam", "Project", "Mastery"].index(label))
         subject = st.text_input("📘 Subject", value=extracted_info["Subject"])
-        study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=int(extracted_info["Study Time in Days"]), min_value=0)
-        study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Hours"]), min_value=1)
+        study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=int(extracted_info["Study Time in Hours"]), min_value=0)
+        study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Days"]), min_value=1)
         grade = st.text_input("🎓 Current Grade", value=extracted_info["Current Grade/Year"])
-        learning_style = st.selectbox("🧠 Learning Style", ["Visual", "Auditory", "Hands-on"], index=["Visual", "Auditory", "Hands-on"].index(extracted_info["Learning Style"]))
-        difficulty = st.text_input("⚠️ Difficulty Areas", value=extracted_info["Difficulty Level"])
+        learning_style = st.multiselect("🧠 Learning Style", ["Visual", "Auditory", "Hands-on"], default = extracted_info["Learning Style"])
+        difficulty = st.selectbox("⚠️ Difficulty Level",["Hard","Medium","Easy"], index=["Hard","Medium","Easy"].index(extracted_info["Difficulty Level"]))
+
         submit = st.form_submit_button("✅ Confirm & Generate Study Plan")
 
     if submit:
-        st.write("### ✅ Study Plan Generated")
-        st.write(f"Goal: {goal}")
-        st.write(f"Subject: {subject}")
-        st.write(f"Study Time per Day: {study_hours} hrs")
-        st.write(f"Study Duration: {study_days} days")
-        st.write(f"Current Grade: {grade}")
-        st.write(f"Learning Style: {learning_style}")
-        st.write(f"Difficulty Areas: {difficulty}")
-        st.success("🎉 Study plan ready!")
+        missing_fields = []
+        if not subject or subject.lower() == "not mentioned":
+            missing_fields.append("Subject")
+        if not grade or grade.lower() == "not mentioned":
+            missing_fields.append("Current Grade/Year")
+        if not difficulty or difficulty.lower() == "not mentioned":
+            missing_fields.append("Difficulty Level")
+        if study_days == 0:
+            missing_fields.append("Study Time in Days")
+        if study_hours == 0:
+            missing_fields.append("Study Time in Hours")
+
+        if missing_fields:
+            st.warning(f"The following fields were not correctly filled: {', '.join(missing_fields)}. You can edit them manually in the form.")
+        else:
+            with st.spinner("Generating study plan..."):
+                plan = generate_study_plan(
+                    goal=goal,
+                    subject=subject,
+                    study_hours=study_hours,
+                    study_days=study_days,
+                    grade=grade,
+                    learning_style=learning_style,
+                    difficulty=difficulty
+                )
+                st.write(plan)
+            # Display the generated study plan
+            
+            st.success("🎉 Study plan ready!")
+            
