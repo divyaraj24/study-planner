@@ -16,12 +16,13 @@ load_dotenv()
 
 model_path = "psuedopadel24/bert-study-planner"
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+HF_API_KEY = os.getenv("HF_API_KEY")
 client = genai.Client(api_key=GOOGLE_API_KEY)
 
 @st.cache_resource
 def load_model():
-    tokenizer = AutoTokenizer.from_pretrained(model_path,token=os.getenv("HF_API_KEY"))
-    model = AutoModelForSequenceClassification.from_pretrained(model_path, device_map=None)
+    tokenizer = AutoTokenizer.from_pretrained(model_path,use_auth_token=HF_API_KEY)
+    model = AutoModelForSequenceClassification.from_pretrained(model_path,use_auth_token=HF_API_KEY)
     return tokenizer, model
 
 
