@@ -5,3 +5,5 @@ datasets
 gdown
 scikit-learn
 pandas
+python-dotenv
+google-genai

@@ -1,90 +1,90 @@
 text,label,predicted,confidence
-I have a math exam next week.,Exam,Exam,0.0007125269039534032
-Preparing for tomorrow’s chemistry test.,Exam,Exam,0.0013192900223657489
-Need to revise all physics formulas before Monday.,Exam,Exam,0.01819058135151863
-Studying previous year question papers for finals.,Exam,Exam,0.00147460016887635
-My biology exam is in two days.,Exam,Exam,0.0007506380206905305
-Making a study plan for upcoming exams.,Exam,Exam,0.0007127620046958327
-Focusing on weak topics before the test.,Exam,Exam,0.0007313917740248144
-I need to cram before the final test.,Exam,Exam,0.0006832581711933017
-The accounting paper has so many formulas to memorize.,Exam,Project,0.0013165253913030028
-I'm reviewing multiple choice questions for the quiz.,Exam,Exam,0.9972800016403198
-Going through mock tests for the entrance exam.,Exam,Exam,0.000906165805645287
-Reviewing notes from all classes for the final.,Exam,Exam,0.9783663749694824
-This semester’s exams are scheduled next week.,Exam,Exam,0.001703709247522056
-Taking a timed test to simulate exam conditions.,Exam,Exam,0.0006499671726487577
-Practicing problems for the competitive exam.,Exam,Exam,0.0006262486567720771
-Organizing all topics to prepare for the board exams.,Exam,Exam,0.0014080527471378446
-Need to complete the syllabus for tomorrow’s exam.,Exam,Exam,0.0009070184314623475
-Making a timetable to cover each subject before the test.,Exam,Exam,0.0007586983265355229
-Hoping to finish revision in time for the exam.,Exam,Exam,0.0006097274599596858
-I’ve scheduled revision sessions before my final.,Exam,Project,0.004877249710261822
-"Tomorrow is the aptitude test, need to prepare.",Exam,Exam,0.0007708981283940375
-My semester-end assessments are starting soon.,Exam,Project,0.8685519695281982
-I'm worried about my calculus midterm.,Exam,Exam,0.0006517909350804985
-I just got the schedule for the final exams.,Exam,Exam,0.0006004262831993401
-Revising all subjects for the assessment week.,Exam,Exam,0.9972690939903259
-The exam duration is just one hour—need to focus.,Exam,Exam,0.0007788174552842975
-Doing a quick revision of biology chapters.,Exam,Exam,0.9136812686920166
-Going over formulas before my physics exam.,Exam,Exam,0.0007359742885455489
-Need to revise everything for my test.,Exam,Exam,0.0005975355161353946
-I need to prepare thoroughly for my math exam.,Exam,Exam,0.0007336228154599667
-The project submission is due next Friday.,Project,Project,0.9986588954925537
-Building a website for the final year project.,Project,Project,0.9724954962730408
-Working on a mobile app prototype with my team.,Project,Project,0.7166854739189148
-We need to submit the project report next week.,Project,Project,0.9984423518180847
-Compiling our group research project.,Project,Project,0.81582111120224
-I'm designing the UI for the class assignment.,Project,Project,0.001889224979095161
-Started working on the robotics project.,Project,Project,0.002134661190211773
-Creating a presentation for our semester project.,Project,Project,0.000969618558883667
-Testing the backend logic for our team project.,Project,Project,0.9844532608985901
-Making a digital portfolio for class.,Project,Mastery,0.000814420694950968
-Adding more features to our hackathon project.,Project,Project,0.9632734656333923
-Trying to finish the documentation for our codebase.,Project,Project,0.997858464717865
-Creating a chatbot as a course mini project.,Project,Project,0.0009853984229266644
-We’re debugging issues in our IoT project.,Project,Project,0.6271060705184937
-Shooting and editing a video for a media class project.,Project,Project,0.0007093240856193006
-Integrating database support into our web project.,Project,Project,0.5977733731269836
-Learning React to complete my frontend project.,Project,Project,0.011594672687351704
-Discussing project requirements with my teammate.,Project,Project,0.0005252322880551219
-Stuck on a bug in my semester-long coding project.,Project,Project,0.0005834981566295028
-Need to deploy the project before the demo day.,Project,Project,0.017459677532315254
-Designing mockups for the app UI.,Project,Project,0.9766108989715576
-Fixing issues before our project presentation.,Project,Project,0.016601087525486946
-We are building a recommendation system.,Project,Project,0.9981845021247864
-Researching datasets for the final ML project.,Project,Project,0.9941224455833435
-Adding finishing touches to the game we built.,Project,Project,0.9806811213493347
-The Arduino project needs better power management.,Project,Project,0.001119285705499351
-Configuring APIs for our inventory system project.,Project,Project,0.25554272532463074
-Recording voiceovers for the animation project.,Project,Mastery,0.1364763379096985
-Publishing our GitHub repo for evaluation.,Project,Project,0.7069668769836426
-Trying to understand recursion in depth.,Mastery,Mastery,0.9984772801399231
-Reading academic papers to improve my ML knowledge.,Mastery,Mastery,0.022561194375157356
-Mastering data structures for competitive programming.,Mastery,Mastery,0.9580217599868774
-Practicing daily to gain command over algorithms.,Mastery,Mastery,0.3196498155593872
-Learning advanced math concepts to improve problem solving.,Mastery,Mastery,0.9680503010749817
-Diving deep into reinforcement learning.,Mastery,Mastery,0.9963470101356506
-Taking extra notes to understand compiler design.,Mastery,Mastery,0.23984527587890625
-Revisiting fundamentals to strengthen my base.,Mastery,Mastery,0.9937654733657837
-Solving Leetcode questions to master problem solving.,Mastery,Mastery,0.9603597521781921
-Doing a deep dive into neural networks.,Mastery,Mastery,0.9518092274665833
-Trying to achieve subject mastery in OS concepts.,Mastery,Mastery,0.9977265000343323
-Understanding code optimization strategies.,Mastery,Mastery,0.9947527647018433
-Improving logical thinking through puzzles.,Mastery,Mastery,0.9952817559242249
-"Focusing on subject comprehension, not just passing.",Mastery,Mastery,0.9933034777641296
-Refining my concepts by teaching others.,Mastery,Mastery,0.9659133553504944
-Reading beyond textbooks to understand fully.,Mastery,Mastery,0.9972436428070068
-Exploring the depths of functional programming.,Mastery,Mastery,0.9969622492790222
-Breaking down proofs to improve logic.,Mastery,Mastery,0.9547064900398254
-Rewriting concepts until they make perfect sense.,Mastery,Project,0.9715686440467834
-Solving harder problems to challenge myself.,Mastery,Mastery,0.0029134582728147507
-Reading research papers to build deeper understanding.,Mastery,Mastery,0.9673041701316833
-Practicing coding without referring to solutions.,Mastery,Mastery,0.030234433710575104
-Analyzing past mistakes to master concepts.,Mastery,Mastery,0.9977239966392517
-Using flashcards to reinforce memory and understanding.,Mastery,Mastery,0.9977521300315857
-Rewriting class notes in my own words.,Mastery,Exam,0.009673594497144222
-Relearning topics I found hard the first time.,Mastery,Mastery,0.9975301623344421
-Studying out-of-syllabus material to satisfy curiosity.,Mastery,Mastery,0.41030749678611755
-Trying to build intuition about core subjects.,Mastery,Mastery,0.9988211989402771
-Challenging myself with new concepts.,Mastery,Mastery,0.9306663870811462
-Working towards deep subject clarity.,Mastery,Mastery,0.9982510209083557
+I have a math exam next week.,Exam,Exam,0.9895648956298828
+Preparing for tomorrow’s chemistry test.,Exam,Exam,0.9887203574180603
+Need to revise all physics formulas before Monday.,Exam,Exam,0.9319700002670288
+Studying previous year question papers for finals.,Exam,Exam,0.9888662695884705
+My biology exam is in two days.,Exam,Exam,0.9894049167633057
+Making a study plan for upcoming exams.,Exam,Exam,0.9897568821907043
+Focusing on weak topics before the test.,Exam,Exam,0.9881938695907593
+I need to cram before the final test.,Exam,Exam,0.9798218011856079
+The accounting paper has so many formulas to memorize.,Exam,Mastery,0.8923901319503784
+I'm reviewing multiple choice questions for the quiz.,Exam,Exam,0.9888812899589539
+Going through mock tests for the entrance exam.,Exam,Exam,0.9894486665725708
+Reviewing notes from all classes for the final.,Exam,Exam,0.9881439805030823
+This semester’s exams are scheduled next week.,Exam,Exam,0.9866287708282471
+Taking a timed test to simulate exam conditions.,Exam,Exam,0.9894970655441284
+Practicing problems for the competitive exam.,Exam,Exam,0.9893578886985779
+Organizing all topics to prepare for the board exams.,Exam,Exam,0.9892771244049072
+Need to complete the syllabus for tomorrow’s exam.,Exam,Exam,0.9897395968437195
+Making a timetable to cover each subject before the test.,Exam,Exam,0.9863001704216003
+Hoping to finish revision in time for the exam.,Exam,Exam,0.990253746509552
+I’ve scheduled revision sessions before my final.,Exam,Exam,0.9205247759819031
+"Tomorrow is the aptitude test, need to prepare.",Exam,Mastery,0.6973869204521179
+My semester-end assessments are starting soon.,Exam,Exam,0.9818812012672424
+I'm worried about my calculus midterm.,Exam,Exam,0.9853171706199646
+I just got the schedule for the final exams.,Exam,Exam,0.9892053604125977
+Revising all subjects for the assessment week.,Exam,Exam,0.9852094054222107
+The exam duration is just one hour—need to focus.,Exam,Exam,0.9894987344741821
+Doing a quick revision of biology chapters.,Exam,Exam,0.5940039157867432
+Going over formulas before my physics exam.,Exam,Exam,0.9862945675849915
+Need to revise everything for my test.,Exam,Exam,0.9894827604293823
+I need to prepare thoroughly for my math exam.,Exam,Exam,0.9895777702331543
+The project submission is due next Friday.,Project,Project,0.9871423244476318
+Building a website for the final year project.,Project,Project,0.9873013496398926
+Working on a mobile app prototype with my team.,Project,Project,0.9847988486289978
+We need to submit the project report next week.,Project,Project,0.9888914823532104
+Compiling our group research project.,Project,Project,0.9863601326942444
+I'm designing the UI for the class assignment.,Project,Project,0.8491011261940002
+Started working on the robotics project.,Project,Project,0.9852030873298645
+Creating a presentation for our semester project.,Project,Project,0.9820289611816406
+Testing the backend logic for our team project.,Project,Project,0.9893084764480591
+Making a digital portfolio for class.,Project,Project,0.8799896836280823
+Adding more features to our hackathon project.,Project,Project,0.9754791855812073
+Trying to finish the documentation for our codebase.,Project,Project,0.9830223917961121
+Creating a chatbot as a course mini project.,Project,Project,0.9831278324127197
+We’re debugging issues in our IoT project.,Project,Project,0.9874780178070068
+Shooting and editing a video for a media class project.,Project,Project,0.9769932627677917
+Integrating database support into our web project.,Project,Project,0.986357569694519
+Learning React to complete my frontend project.,Project,Project,0.9867807030677795
+Discussing project requirements with my teammate.,Project,Project,0.9877804517745972
+Stuck on a bug in my semester-long coding project.,Project,Project,0.9788686633110046
+Need to deploy the project before the demo day.,Project,Project,0.98909991979599
+Designing mockups for the app UI.,Project,Project,0.9752255082130432
+Fixing issues before our project presentation.,Project,Project,0.9889150261878967
+We are building a recommendation system.,Project,Project,0.6308833360671997
+Researching datasets for the final ML project.,Project,Project,0.9888864159584045
+Adding finishing touches to the game we built.,Project,Project,0.9077126979827881
+The Arduino project needs better power management.,Project,Project,0.972617506980896
+Configuring APIs for our inventory system project.,Project,Project,0.9811465740203857
+Recording voiceovers for the animation project.,Project,Project,0.979853630065918
+Publishing our GitHub repo for evaluation.,Project,Project,0.9078986048698425
+Trying to understand recursion in depth.,Mastery,Mastery,0.9573065042495728
+Reading academic papers to improve my ML knowledge.,Mastery,Mastery,0.9528505206108093
+Mastering data structures for competitive programming.,Mastery,Mastery,0.9342168569564819
+Practicing daily to gain command over algorithms.,Mastery,Mastery,0.8832024335861206
+Learning advanced math concepts to improve problem solving.,Mastery,Mastery,0.9566989541053772
+Diving deep into reinforcement learning.,Mastery,Mastery,0.9439395666122437
+Taking extra notes to understand compiler design.,Mastery,Mastery,0.8673313856124878
+Revisiting fundamentals to strengthen my base.,Mastery,Mastery,0.9523735642433167
+Solving Leetcode questions to master problem solving.,Mastery,Mastery,0.9526911973953247
+Doing a deep dive into neural networks.,Mastery,Mastery,0.9257597327232361
+Trying to achieve subject mastery in OS concepts.,Mastery,Mastery,0.9544584155082703
+Understanding code optimization strategies.,Mastery,Mastery,0.9179320931434631
+Improving logical thinking through puzzles.,Mastery,Mastery,0.9538118243217468
+"Focusing on subject comprehension, not just passing.",Mastery,Mastery,0.8298928141593933
+Refining my concepts by teaching others.,Mastery,Mastery,0.9599836468696594
+Reading beyond textbooks to understand fully.,Mastery,Mastery,0.9572793245315552
+Exploring the depths of functional programming.,Mastery,Mastery,0.9467196464538574
+Breaking down proofs to improve logic.,Mastery,Mastery,0.9427065253257751
+Rewriting concepts until they make perfect sense.,Mastery,Mastery,0.9393203854560852
+Solving harder problems to challenge myself.,Mastery,Mastery,0.9501011371612549
+Reading research papers to build deeper understanding.,Mastery,Mastery,0.8912468552589417
+Practicing coding without referring to solutions.,Mastery,Mastery,0.9222381114959717
+Analyzing past mistakes to master concepts.,Mastery,Mastery,0.9536923170089722
+Using flashcards to reinforce memory and understanding.,Mastery,Mastery,0.9410075545310974
+Rewriting class notes in my own words.,Mastery,Exam,0.9081178903579712
+Relearning topics I found hard the first time.,Mastery,Mastery,0.6004729270935059
+Studying out-of-syllabus material to satisfy curiosity.,Mastery,Exam,0.9815803170204163
+Trying to build intuition about core subjects.,Mastery,Mastery,0.9402232766151428
+Challenging myself with new concepts.,Mastery,Mastery,0.9481092691421509
+Working towards deep subject clarity.,Mastery,Mastery,0.9512442946434021

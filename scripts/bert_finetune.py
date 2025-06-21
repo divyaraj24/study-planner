@@ -31,12 +31,11 @@ from google.colab import files
 uploaded = files.upload()
 import pandas as pd
 
-df = pd.read_csv("study_planner_4class.csv")
+df = pd.read_csv("balanced_study_planner_dataset.csv")
 df["label"] = df["label"].map({
     "Exam": 0,
     "Project": 1,
     "Mastery": 2,
-    "Unidentified": 3
 })
 
 from sklearn.model_selection import train_test_split
@@ -44,6 +43,7 @@ from sklearn.model_selection import train_test_split
 train_texts, val_texts, train_labels, val_labels = train_test_split(
     df["text"].tolist(), df["label"].tolist(), test_size=0.2, stratify=df["label"]
 )
+print(df["label"].value_counts())
 
 from transformers import BertTokenizer
 
@@ -74,24 +74,27 @@ import os
 os.environ["WANDB_DISABLED"] = "true"
 from transformers import BertForSequenceClassification, Trainer, TrainingArguments
 
-model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=4)
+model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=3)
 
 training_args = TrainingArguments(
     output_dir="./results",
-    num_train_epochs=4,
-    per_device_train_batch_size=8,
+    num_train_epochs=8,
+    per_device_train_batch_size=16,
     per_device_eval_batch_size=8,
     evaluation_strategy="epoch",
     save_strategy="epoch",
     logging_dir="./logs",
     logging_steps=10,
+    warmup_steps=100,
+    weight_decay=0.01,
+    learning_rate=2e-5
 )
 
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=train_dataset,
-    eval_dataset=val_dataset
+    eval_dataset=val_dataset,
 )
 
 
