@@ -1,6 +1,57 @@
-# Studbud: Study Planner using BERT
+# 📚 Studbud: Personalized Study Planner
 
-## ⚠️ BERT Model Disclaimer
+**Studbud** is an AI-powered web application built using **Streamlit**, which helps students create **customized study plans** based on their individual needs and goals. The app utilizes a **fine-tuned BERT model** for text classification and **Google Gemini** for intelligent information extraction and plan generation.
+
+---
+
+## 🚀 Features
+
+### 1. **Intelligent Goal Detection**
+- Users input a natural-language study intent (e.g., "I want to study DSA for my upcoming exam").
+- The system classifies the goal as **Exam**, **Project**, or **Mastery** using a BERT model.
+
+### 2. **Information Extraction with Gemini**
+- Extracts structured information from the user input such as:
+  - Goal
+  - Subject
+  - Available study time
+  - Current academic level
+  - Learning preferences
+  - Difficulty level
+
+### 3. **Editable Study Form**
+- Pre-filled form fields allow users to review and modify their information.
+- Detects and warns about missing or unclear data.
+
+### 4. **Dynamic Study Plan Generator**
+- Generates a tailored plan based on:
+  - Study scenario (Exam, Project, Mastery)
+  - Time availability and difficulty
+  - Preferred learning styles
+- Includes:
+  - Timeline breakdown
+  - Daily workload
+  - Strategy recommendations
+---
+
+## 💡 Technologies Used
+- **Python**
+- **Streamlit** (UI)
+- **HuggingFace Transformers** (BERT-based classification)
+- **Google Gemini Pro** (Information extraction + plan enhancement)
+- **Dotenv** (Environment management)
+
+---
+
+## 🌟 Use Case
+This app is ideal for:
+- Students preparing for upcoming **exams**
+- Learners managing **long-term mastery**
+- Anyone organizing a **project-based learning** journey
+
+---
+
+### ⚠️ BERT Model Disclaimer
 
 This project requires a fine-tuned BERT model directory named `bert_study_model` which is **not included** in the GitHub repository due to file size limitations (GitHub restricts files larger than 100MB).
 
@@ -8,7 +59,7 @@ This project requires a fine-tuned BERT model directory named `bert_study_model`
 
 Please manually download the model from the link below:
 
-🔗 [Download `bert_study_model.zip`](https://drive.google.com/file/d/1D9jOUnCGUM0TsyYa61uHQqF4gfyOa9oN/view?usp=sharing)  
+🔗 [Download `bert_study_model.zip`](https://drive.google.com/file/d/1id0M2myASpL34piavcAoKJamqN9_d6B9/view?usp=sharing)  
 
 ### 📦 Setup Instructions
 
@@ -37,6 +88,7 @@ study-planner/
 │   └── bert_finetune.ipynb         # Your Colab notebook or Python script
 ├── README.md                       # Project overview and usage
 ├── .gitignore                      # Ignored files
+├── .env                            # Add environment variables like API keys
 └── requirements.txt                # Dependencies for setup
 ```
 
@@ -90,26 +142,9 @@ After fine-tuning the BERT model on a balanced dataset of labeled study planning
 - Trained model and tokenizer saved to `bert_study_model/`
 - Exported as a downloadable ZIP file for deployment or reuse
 
----
+### 🎯 Next Goal
 
-## 📊 Study Plan Generation
-
-Once a scenario (Exam, Project, Mastery) is identified:
-
-- Develop Model to take prompts to generate personalized study plans based on:
-  - Goal
-  - Subject
-  - Study time available -> hours, days..
-  - Current Grade
-  - Learning Style
-
-BERT model is mainly used for classification and Question/Answering with context so the prompt will be used to extract the above details from the raw user input text.
-
-Once the required information is extracted it can be used to make an apropriate study plan.
-
-## 🖥️ Streamlit GUI
-
-- Added GUI (Need to update README)
+- As the BERT model was trained only on one line inputs the next step is to make a fine tuned model trained on a dataset with multiple line values.
 
 ---
 
