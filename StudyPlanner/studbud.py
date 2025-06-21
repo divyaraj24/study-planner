@@ -14,14 +14,14 @@ load_dotenv()
 # st.write("Transformers path:", transformers.__file__)
 # st.write("Transformers version:", transformers.__version__)
 
-model_path = "./bert_study_model"
+model_path = "psuedopadel24/bert-study-planner"
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 client = genai.Client(api_key=GOOGLE_API_KEY)
 
 @st.cache_resource
 def load_model():
     model_path = "./bert_study_model"
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    tokenizer = AutoTokenizer.from_pretrained(model_path,token=os.getenv("HF_API_KEY"))
     model = AutoModelForSequenceClassification.from_pretrained(model_path, device_map=None)
     return tokenizer, model
 
