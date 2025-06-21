@@ -136,10 +136,11 @@ def generate_study_plan(goal, subject, study_hours, study_days, grade, learning_
 
 st.title("Studbud: Study Planner")
 st.write("Enter your study-related query below:")
-user_input = st.text_area("Input", height=200, label_visibility="collapsed")
+user_input = st.text_area("Input", height=200,placeholder=f"""Mention details like: Goal, Subject, Time in days, Time in hours per day, Current grade, Learning Style and Current difficulty.""", label_visibility="collapsed")
 
 button_1 = st.button("Generate Study Form")
 button_2 = st.button("Reload")
+
 
 if button_1 and user_input.strip():
     
@@ -196,7 +197,7 @@ if st.session_state.get("show_form"):
         goal = st.selectbox("🎯 Goal (Edit If Necessary)", ["Exam", "Project", "Mastery"], index=["Exam", "Project", "Mastery"].index(label))
         subject = st.text_input("📘 Subject", value=extracted_info["Subject"])
         study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=int(extracted_info["Study Time in Hours"]), min_value=0)
-        study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Days"]), min_value=1)
+        study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Days"]), min_value=0)
         grade = st.text_input("🎓 Current Grade", value=extracted_info["Current Grade/Year"])
         learning_style = st.multiselect("🧠 Learning Style", ["Visual", "Auditory", "Hands-on"], default = extracted_info["Learning Style"])
         difficulty = st.selectbox("⚠️ Difficulty Level",["Hard","Medium","Easy"], index=["Hard","Medium","Easy"].index(extracted_info["Difficulty Level"]))
