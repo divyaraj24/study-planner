@@ -49,8 +49,8 @@ def extract_study_info(text):
 Extract the following details from the text and return as stated below:
 - Goal i.e. to prepare for an exam, complete a project, or achieve mastery
 - Subject
-- Study time available in days
-- Study time available in hours
+- Study time available in days 
+- Study time available in hours (Return int value, only maximum one)
 - Current Grade/Year
 - Learning Style (visual, auditory, hands-on)
 - Difficulty level (easy, medium, hard)
@@ -76,7 +76,7 @@ Return the result in this format with apropriate string and integer values:
 def generate_study_plan(goal, subject, study_hours, study_days, grade, learning_style, difficulty):
     plan = ""
 
-    # Intro
+    # Intro 
     plan += f"🎓 **Personalized Study Plan for {subject} ({goal})**.  \n  \n"
     plan += f"Student Level: {grade}.  \n"
     plan += f"Study Duration: {study_days} days for {study_hours} hrs/day.  \n"
@@ -104,7 +104,7 @@ def generate_study_plan(goal, subject, study_hours, study_days, grade, learning_
     for day in range(1, study_days + 1):
         plan += f"- **Day {day}:**\n"
         if goal == "Exam":
-            plan += f"  - {subject}: Study weak topics for {study_hours // 2} hrs,  \nsolve practice problems for {study_hours // 2} hrs.\n"
+            plan += f"  - {subject}: Study weak topics for {study_hours / 2} hrs,  \nsolve practice problems for {study_hours / 2} hrs.\n"
         elif goal == "Project":
             plan += f"  - {subject}: Progress in assigned task.  \nLog findings and prepare for next phase.\n"
         elif goal == "Mastery":
@@ -156,11 +156,12 @@ if button_1 and user_input.strip():
         st.session_state.label = label
         st.session_state.show_form = True  # Trigger form rendering
         st.write("Scenario is wrong? Just change the scenario in the form.")
-        
 
     except Exception as e:
+        st.session_state.show_form = False  # Reset form state
         st.error(f"Error parsing response: {e}")
         st.write("Response was:", response)
+
 elif button_1 :
     st.error("Please enter some text to classify.")
 
@@ -181,11 +182,11 @@ if st.session_state.get("show_form"):
         if value == "Not mentioned":
             if key == "Subject" or key == "Current Grade/Year":
                 extracted_info[key] = ""
-            elif key == "Learning Style":
+            if key == "Learning Style":
                 extracted_info[key] = []
-            elif key == "Difficulty Level":
+            if key == "Difficulty Level":
                 extracted_info[key] = "Medium"
-            elif key == "Study Time in Days" or key == "Study Time in Hours":
+            if key == "Study Time in Days" or key == "Study Time in Hours":
                 extracted_info[key] = 0
 
     # Handle Case where no scenario is given
@@ -202,23 +203,31 @@ if st.session_state.get("show_form"):
  
 
     st.success(f"Scenario: {label}.")
-    with st.form("study_plan_form"):
+    try: 
+        with st.form("study_plan_form"):
 
-        # Handle Case where no scenario is given
-        options = ["Exam", "Project", "Mastery"]
-        index = options.index(label) if label in options else None
+            # Handle Case where no scenario is given
+            options = ["Exam", "Project", "Mastery"]
+            index = options.index(label) if label in options else None
+            goal = st.selectbox("🎯 Goal (Edit If Necessary)", options, index=index)
+            subject = st.text_input("📘 Subject", value=extracted_info["Subject"])
+            study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=int(extracted_info["Study Time in Hours"]), min_value=0, max_value=24)
+            study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Days"]), min_value=0, max_value=365)
+            grade = st.text_input("🎓 Current Grade", value=extracted_info["Current Grade/Year"])
+            learning_style = st.multiselect("🧠 Learning Style", ["Visual", "Auditory", "Hands-on"], default = extracted_info["Learning Style"])
+            difficulty = st.selectbox("⚠️ Difficulty Level",["Hard","Medium","Easy"], index=["Hard","Medium","Easy"].index(extracted_info["Difficulty Level"]))
+        
+            submit = st.form_submit_button("✅ Confirm & Generate Study Plan")
 
-        goal = st.selectbox("🎯 Goal (Edit If Necessary)", options, index=index)
-        subject = st.text_input("📘 Subject", value=extracted_info["Subject"])
-        study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=int(extracted_info["Study Time in Hours"]), min_value=0)
-        study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Days"]), min_value=0)
-        grade = st.text_input("🎓 Current Grade", value=extracted_info["Current Grade/Year"])
-        learning_style = st.multiselect("🧠 Learning Style", ["Visual", "Auditory", "Hands-on"], default = extracted_info["Learning Style"])
-        difficulty = st.selectbox("⚠️ Difficulty Level",["Hard","Medium","Easy"], index=["Hard","Medium","Easy"].index(extracted_info["Difficulty Level"]))
 
-        submit = st.form_submit_button("✅ Confirm & Generate Study Plan")
+    except Exception as e:
+        st.error(f"Error in form input: {e}. Please check your inputs.")
+        st.stop()
+
+   
 
     if submit:
+        # Validate inputs
         missing_fields = []
         if not subject or subject.lower() == "not mentioned":
             missing_fields.append("Subject")
@@ -226,13 +235,15 @@ if st.session_state.get("show_form"):
             missing_fields.append("Current Grade/Year")
         if not difficulty or difficulty.lower() == "not mentioned":
             missing_fields.append("Difficulty Level")
-        if study_days == 0:
+        if study_days == 0 or  study_days < 1 or study_days > 365:
             missing_fields.append("Study Time in Days")
-        if study_hours == 0:
+        if study_hours == 0 or study_hours < 0 or study_hours > 24:
             missing_fields.append("Study Time in Hours")
 
         if missing_fields:
             st.warning(f"The following fields were not correctly filled: {', '.join(missing_fields)}. You can edit them manually in the form.")
+
+        # If all fields are valid, generate the study plan
         else:
             with st.spinner("Generating study plan..."):
                 plan = generate_study_plan(
