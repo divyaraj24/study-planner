@@ -156,7 +156,7 @@ if button_1 and user_input.strip():
         st.session_state.label = label
         st.session_state.show_form = True  # Trigger form rendering
         st.write("Scenario is wrong? Just change the scenario in the form.")
-        st.success(f"Scenario: {label}.")
+        
 
     except Exception as e:
         st.error(f"Error parsing response: {e}")
@@ -188,13 +188,27 @@ if st.session_state.get("show_form"):
             elif key == "Study Time in Days" or key == "Study Time in Hours":
                 extracted_info[key] = 0
 
+    # Handle Case where no scenario is given
+    if extracted_info["Goal"] != "Not mentioned":
+        
+        st.warning(f"There is no scenario detected. Please enter a scenario.")
+
+    label = "Not mentioned" if label == "Not mentioned" else label
+
     # Override the goal label if it does not match the extracted info
     if extracted_info["Goal"] != label:
-        st.warning(f"Detected goal '{extracted_info["Goal"]}' does not match classified label '{label}'. Using detected goal instead.")
-        label = extracted_info["Goal"]   
-    
+        #st.warning(f"Detected goal '{extracted_info["Goal"]}' does not match classified label '{label}'. Using detected goal instead.")
+        label = extracted_info["Goal"]  
+ 
+
+    st.success(f"Scenario: {label}.")
     with st.form("study_plan_form"):
-        goal = st.selectbox("🎯 Goal (Edit If Necessary)", ["Exam", "Project", "Mastery"], index=["Exam", "Project", "Mastery"].index(label))
+
+        # Handle Case where no scenario is given
+        options = ["Exam", "Project", "Mastery"]
+        index = options.index(label) if label in options else None
+
+        goal = st.selectbox("🎯 Goal (Edit If Necessary)", options, index=index)
         subject = st.text_input("📘 Subject", value=extracted_info["Subject"])
         study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=int(extracted_info["Study Time in Hours"]), min_value=0)
         study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Days"]), min_value=0)
@@ -234,4 +248,6 @@ if st.session_state.get("show_form"):
             # Display the generated study plan
             
             st.success("🎉 Study plan ready!")
+            
+            
             
