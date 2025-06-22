@@ -211,8 +211,8 @@ if st.session_state.get("show_form"):
             index = options.index(label) if label in options else None
             goal = st.selectbox("🎯 Goal (Edit If Necessary)", options, index=index)
             subject = st.text_input("📘 Subject", value=extracted_info["Subject"])
-            study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=int(extracted_info["Study Time in Hours"]), min_value=0, max_value=24)
-            study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Days"]), min_value=0, max_value=365)
+            study_hours = st.number_input("🕒 Study Time per Day (hrs)", value=int(extracted_info["Study Time in Hours"]))
+            study_days = st.number_input("📅 Study Duration (days)", value=int(extracted_info["Study Time in Days"]))
             grade = st.text_input("🎓 Current Grade", value=extracted_info["Current Grade/Year"])
             learning_style = st.multiselect("🧠 Learning Style", ["Visual", "Auditory", "Hands-on"], default = extracted_info["Learning Style"])
             difficulty = st.selectbox("⚠️ Difficulty Level",["Hard","Medium","Easy"], index=["Hard","Medium","Easy"].index(extracted_info["Difficulty Level"]))
@@ -221,7 +221,7 @@ if st.session_state.get("show_form"):
 
 
     except Exception as e:
-        st.error(f"Error in form input: {e}. Please check your inputs.")
+        st.warning(f"Error in form input: {e}. Please check your inputs.")
         st.stop()
 
    
