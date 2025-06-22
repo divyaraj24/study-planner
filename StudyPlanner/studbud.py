@@ -189,7 +189,7 @@ if st.session_state.get("show_form"):
                 extracted_info[key] = 0
 
     # Handle Case where no scenario is given
-    if extracted_info["Goal"] != "Not mentioned":
+    if extracted_info["Goal"] == "Not mentioned":
         
         st.warning(f"There is no scenario detected. Please enter a scenario.")
 
