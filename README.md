@@ -9,10 +9,12 @@
 ## 🚀 Features
 
 ### 1. **Intelligent Goal Detection**
+
 - Users input a natural-language study intent (e.g., "I want to study DSA for my upcoming exam").
 - The system classifies the goal as **Exam**, **Project**, or **Mastery** using a BERT model.
 
 ### 2. **Information Extraction with Gemini**
+
 - Extracts structured information from the user input such as:
   - Goal
   - Subject
@@ -22,10 +24,12 @@
   - Difficulty level
 
 ### 3. **Editable Study Form**
+
 - Pre-filled form fields allow users to review and modify their information.
 - Detects and warns about missing or unclear data.
 
 ### 4. **Dynamic Study Plan Generator**
+
 - Generates a tailored plan based on:
   - Study scenario (Exam, Project, Mastery)
   - Time availability and difficulty
@@ -34,9 +38,11 @@
   - Timeline breakdown
   - Daily workload
   - Strategy recommendations
+
 ---
 
 ## 💡 Technologies Used
+
 - **Python**
 - **Streamlit** (UI)
 - **HuggingFace Transformers** (BERT-based classification)
@@ -46,7 +52,9 @@
 ---
 
 ## 🌟 Use Case
+
 This app is ideal for:
+
 - Students preparing for upcoming **exams**
 - Learners managing **long-term mastery**
 - Anyone organizing a **project-based learning** journey
@@ -61,26 +69,25 @@ This project requires a fine-tuned bert mode uploaded to hugging face, which is 
 
 Please use this link below to download the model:
 
-🔗 [Download `bert_study_model.zip`](https://drive.google.com/file/d/1id0M2myASpL34piavcAoKJamqN9_d6B9/view?usp=sharing)  
-
+🔗 [Download `bert_study_model.zip`](https://drive.google.com/file/d/1id0M2myASpL34piavcAoKJamqN9_d6B9/view?usp=sharing)
 
 ## 📁 Project Structure:
 
 ```
 study-planner/
 ├── data/                           # All CSV or raw input/output data
+│   ├── balanced_study_planner_dataset.csv
 │   ├── test_3way.csv
-|   ├── bert_finetune_train.csv
 │   └── test_results_3way.csv
-├── StudyPlanner/                   # Source code package
-│   ├── studbud.py                  # Streamlit app
-│   └── test_model.py               # Model evaluation script
-├── scripts/                        # For training, preprocessing, etc.
-│   └── bert_finetune.ipynb         # Your Colab notebook or Python script
 ├── README.md                       # Project overview and usage
+├── requirements.txt                # Dependencies for setup
 ├── .gitignore                      # Ignored files
 ├── .env                            # Add environment variables like API keys
-└── requirements.txt                # Dependencies for setup
+├── scripts/
+│   └── bert_finetune.py
+└── StudyPlanner/                   # Source code package
+    ├── studbud.py                  # Streamlit app
+    └── test_model.py
 ```
 
 # 🧠 Fine-Tuned BERT Model for Study Task Classification
@@ -102,12 +109,12 @@ After fine-tuning the BERT model on a balanced dataset of labeled study planning
 
 ### 📊 Classification Report
 
-| Label    | Precision | Recall | F1-Score | Support |
-|----------|-----------|--------|----------|---------|
-| **Exam**     | 0.93      | 0.93   | 0.93     | 30      |
-| **Mastery**  | 0.93      | 0.93   | 0.93     | 30      |
-| **Project**  | 1.00      | 1.00   | 1.00     | 29      |
-| **Overall**  |           |        | **0.96** | 89      |
+| Label       | Precision | Recall | F1-Score | Support |
+| ----------- | --------- | ------ | -------- | ------- |
+| **Exam**    | 0.93      | 0.93   | 0.93     | 30      |
+| **Mastery** | 0.93      | 0.93   | 0.93     | 30      |
+| **Project** | 1.00      | 1.00   | 1.00     | 29      |
+| **Overall** |           |        | **0.96** | 89      |
 
 ### ⚙️ Model Architecture
 
@@ -124,9 +131,9 @@ After fine-tuning the BERT model on a balanced dataset of labeled study planning
 - Total Examples: `~89` (balanced across the 3 classes)
 - Data Split: `80% training`, `20% validation`
 - Labels encoded as:
-  - `0` → Exam  
-  - `1` → Project  
-  - `2` → Mastery  
+  - `0` → Exam
+  - `1` → Project
+  - `2` → Mastery
 
 ### 💾 Model Output
 
