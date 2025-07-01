@@ -134,12 +134,33 @@ def generate_study_plan(goal, subject, study_hours, study_days, grade, learning_
 
 # Streamlit UI
 
-st.title("Studbud: Study Planner")
+st.markdown("""
+            <style>
+                div[data-testid="stColumn"] {
+                    width: fit-content !important;
+                    flex: unset;
+                }
+                div[data-testid="stColumn"] * {
+                    width: fit-content !important;
+                }
+            </style>
+            """, unsafe_allow_html=True)
+
+st.title("🎓 Studbud: Study Planner")
 st.write("Enter your study-related query below:")
 user_input = st.text_area("Input", height=200,placeholder=f"""Mention details like: Goal, Subject, Time in days, Time in hours per day, Current grade, Learning Style and Current difficulty.""", label_visibility="collapsed")
 
-button_1 = st.button("Generate Study Form")
-button_2 = st.button("Reload")
+
+# button_1 = st.button("Generate Study Form")
+# button_2 = st.button("Reload")
+
+col1, col2 = st.columns([1,1])
+
+with col1:
+    button_1 = st.button("Generate Study Form", key="button_1")
+with col2:
+    button_2 = st.button("Reload Model", key="button_2")
+
 
 
 if button_1 and user_input.strip():
@@ -203,6 +224,9 @@ if st.session_state.get("show_form"):
  
 
     st.success(f"Scenario: {label}.")
+
+    st.markdown("### ✏️ Fill Out Study Preferences")
+
     try: 
         with st.form("study_plan_form"):
 
@@ -246,6 +270,8 @@ if st.session_state.get("show_form"):
         # If all fields are valid, generate the study plan
         else:
             with st.spinner("Generating study plan..."):
+                st.markdown("### 📅 Study Plan")
+
                 plan = generate_study_plan(
                     goal=goal,
                     subject=subject,
